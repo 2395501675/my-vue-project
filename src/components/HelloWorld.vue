@@ -1,18 +1,33 @@
 <template>
-  <div class="hello">
-    <input type="text" :value="value" @change="onInput" />
-  </div>
+<div>
+  1111111{{post}}
+    <input type="text" :value="value" v-on="inputListeners"/>
+    <hr>
+</div>
 </template>
 
 <script>
 export default {
   name: "HelloWorld",
+  inject: ['post'],
   props: {
     value: String
   },
   model: {
     value: "value",
-    event: "change"
+    event: "input"
+  },
+  computed: {
+    inputListeners() {
+      let vm = this
+      return Object.assign({},
+      this.$listeners,{
+        input: function(event) {
+          vm.$emit('input', event.target.value);
+          vm.post.id = 'bb'
+        }
+      }) 
+    }
   },
   methods: {
     onInput(e) {
