@@ -13,6 +13,10 @@ export default {
   props: {
     value: String
   },
+  mounted () {
+    console.log('helloworld.vue', this.$bus.post);
+    
+  },
   model: {
     value: "value",
     event: "input"

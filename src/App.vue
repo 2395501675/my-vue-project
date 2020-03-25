@@ -1,21 +1,12 @@
 <template>
   <div id="app">
-    <hello-world v-on:focus.native="onFocus" v-model="msg" @change-msg="addMsg"></hello-world>
-    <message placeholder="请输入用户名" type="number" :post="post" inline-template>
-      <div>
-        <p>These are compiled as the component's own template.</p>
-        <p>Not parent's transclusion content.</p>
-      </div>
-    </message>
-    <input type="text" v-focus>
-    {{post}}
-    {{title}}{{message}}
-    <button @click="onClick()">提交</button>
+    <input type="text" value="sdfsf">
     <div id="nav">
       <router-link to="/">Home</router-link>|
       <router-link to="/about">About</router-link>
     </div>
     <router-view />
+    <KForm></KForm>
   </div>
 </template>
 
@@ -35,8 +26,9 @@ var myMixin = {
     }
   }
 }
-import HelloWorld from '@/components/HelloWorld.vue'
-import message from "@/components/message.vue";
+// import HelloWorld from '@/components/HelloWorld.vue'
+// import message from "@/components/message.vue";
+import KForm from "@/components/form/index.vue";
 export default {
   directives: {
     focus: {
@@ -50,10 +42,15 @@ export default {
       post: this.post
     }
   },
+  mounted () {
+    this.$bus.post = {name: 'lnn', gzh: 'xiaohuamao'}
+    console.log('app.vue', this.$bus.post);
+  },
   mixins: [myMixin],
   components: {
-    HelloWorld,
-    message
+    // HelloWorld,
+    // message,
+    KForm
   },
   data() {
     return {
@@ -73,18 +70,19 @@ export default {
       console.log(11111)
     },
     onClick(){
+      this.$bus.$emit("aMsg", '来自app页面的消息')
       this.post.id = 'cc'
     }
   }
 };
 </script>
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: rgb(76, 0, 255);
 }
 
 #nav {
@@ -94,9 +92,6 @@ export default {
 #nav a {
   font-weight: bold;
   color: #2c3e50;
-}
-input {
-  color: red;
 }
 #nav a.router-link-exact-active {
   color: #42b983;

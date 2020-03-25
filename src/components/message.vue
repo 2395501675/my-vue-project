@@ -3,15 +3,22 @@
     <input v-bind="$attrs" />
     title: {{title}}
     post: {{post}}
-    id: {{id}}
+    id1: {{id}}
     postName:{{postName}}
-    <button @click="onClick()">提交</button>
+    $bus:{{$bus.post}}
+    <button @click="onClick()">msg提交</button>
     <hr />
   </div>
 </template>
 
 <script>
 export default {
+  mounted () {
+    console.log('message.vue', this.$bus.post);
+    this.$bus.$on('aMsg', (msg) => {
+      console.log(msg)
+    })
+  },
   props: {
     name: String,
     title: String,
@@ -27,7 +34,6 @@ export default {
       }
     };
   },
-  mounted() {},
   methods: {
     onClick() {
       this.$emit("update:name", "lnn");
