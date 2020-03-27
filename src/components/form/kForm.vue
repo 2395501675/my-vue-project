@@ -22,7 +22,6 @@ export default {
   },
   methods: {
       validate(cb) {
-          console.log(cb)
         // 全局校验
         // 便利item，执行他们的validate方法
         const tasks = this.$children.filter(item => {

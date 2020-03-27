@@ -6,7 +6,10 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view />
-    <KForm></KForm>
+    <!-- <KForm></KForm> -->
+    <hr>
+    elementui表单
+  <!-- <elementForm></elementForm> -->
   </div>
 </template>
 
@@ -28,7 +31,8 @@ var myMixin = {
 }
 // import HelloWorld from '@/components/HelloWorld.vue'
 // import message from "@/components/message.vue";
-import KForm from "@/components/form/index.vue";
+// import KForm from "@/components/form/index.vue";
+// import elementForm from "@/components/elementForm.vue";
 export default {
   directives: {
     focus: {
@@ -44,13 +48,13 @@ export default {
   },
   mounted () {
     this.$bus.post = {name: 'lnn', gzh: 'xiaohuamao'}
-    console.log('app.vue', this.$bus.post);
   },
   mixins: [myMixin],
   components: {
+    // elementForm,
     // HelloWorld,
     // message,
-    KForm
+    // KForm
   },
   data() {
     return {
@@ -82,7 +86,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: rgb(76, 0, 255);
+  color: rgb(0, 38, 255);
 }
 
 #nav {

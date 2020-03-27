@@ -2,9 +2,10 @@
   <div>
     <k-form :formData="formData" :rules="rules" ref="loginForm">
         <!-- 用户名 -->
-      <k-item label="用户名" prop="username">
-        <k-input v-model="formData.username" placeholder="用户名"></k-input>
+      <k-item label="用户名" prop="name">
+        <k-input v-model="formData.name" placeholder="用户名"></k-input>
       </k-item>
+      <!-- 密码 -->
       <k-item label="密码" prop="password">
         <k-input v-model="formData.password" type="password" placeholder="密码"></k-input>
       </k-item>
@@ -12,7 +13,7 @@
         <button @click="onClick">提交</button>
       </k-item>
       
-      <!-- 密码 -->
+      
     </k-form>
   </div>
 </template>
@@ -21,6 +22,7 @@
 import kForm from "@/components/form/kForm.vue";
 import kItem from "@/components/form/kItem.vue";
 import kInput from "@/components/form/kInput.vue";
+import notice from "@/components/notice.vue";
 export default {
     components: {
         kForm,
@@ -30,11 +32,11 @@ export default {
     data() {
         return {
             formData: {
-                username: 'lnn',
-                password: '123456'
+                name: '',
+                password: ''
             },
             rules: {
-                username: [{required: true, message: '请输入用户名'}],
+                name: [{required: true, message: '请输入用户名'}],
                 password: [{required: true, message: '请输入密码'}],
             }
         }
@@ -45,13 +47,34 @@ export default {
                 if (isValid) {
                     console.log('submit login!')
                 } else {
-                    alert("校验失败")
+                     this.$kmessage({
+                       title: 'message提醒',
+                       message: '登录失败',
+                       duration: 5000
+                   })
                 }
+                   this.$create(notice, {
+                       title: 'create提醒',
+                       message: '登录失败',
+                       duration: 2000
+                   }).show()
+                    this.$message({message: '我是真的e', duration: 50000})
+                    this.$message({message: '我是真的1122', duration: 50000})
+                    this.$message({message: '我是真的11223', duration: 50000})
             })
         }
     },
 };
 </script>
 
-<style scoped>
+<style>
+ .message1{
+     width: 100%;
+     height: 150px;
+     text-align: center;
+     background:#eee;
+     position: absolute;
+     top:150px;
+     border:2px solid green;
+ }
 </style>
