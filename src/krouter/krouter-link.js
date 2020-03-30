@@ -6,7 +6,7 @@ export default{
             require:true
         }
     },
-    render(h) {
+    render() {
         return <a href={'#'+this.to}>{this.$slots.default}</a>;
     }
     // template: "<a href={{'#/'+ to}}><slot></slot></a>"

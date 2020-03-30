@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './krouter'
+import store from './kstore'
 import {create} from '@/utils/create'
 import kmessage from '@/utils/message'
 import ElementUI from 'element-ui'
@@ -13,5 +14,6 @@ Vue.prototype.$bus = new Vue()
 Vue.prototype.$create = create
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')

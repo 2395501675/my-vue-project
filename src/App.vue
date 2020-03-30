@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <input type="text" value="sdfsf">
+    count: {{$store.state.count}}
+    <input type="text" v-model="$store.state.count">
+    <button @click="$store.commit('add')">commit add</button>
+    <button @click="$store.dispatch('asyncAdd')">dispatch add</button>
+    <span>doubleCount: {{$store.getters.doubleCount}}</span>
+    <!-- <span>msg2： {{msg2}}</span> -->
     <div id="nav">
       <router-link to="/">Home</router-link>|
       <router-link to="/about">About</router-link>
@@ -47,6 +52,9 @@ export default {
     }
   },
   mounted () {
+    console.log(this.$store)
+    console.log(this.$store.getters)
+    this.$store.state.count = 4
     this.$bus.post = {name: 'lnn', gzh: 'xiaohuamao'}
   },
   mixins: [myMixin],
@@ -55,6 +63,11 @@ export default {
     // HelloWorld,
     // message,
     // KForm
+  },
+  computed: {
+    msg2(msg) {
+      return this.msg + msg
+    }
   },
   data() {
     return {
