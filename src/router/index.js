@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import { Router } from 'express'
 
 Vue.use(VueRouter)
 
@@ -19,9 +20,15 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   }
 ]
+// 服务端渲染改造
+export function createRouter() {
+  return new Router({
+    mode: 'history',
+    routes
+  })
+}
+// const router = new VueRouter({
+//   routes
+// })
 
-const router = new VueRouter({
-  routes
-})
-
-export default router
+// export default router

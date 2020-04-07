@@ -10,22 +10,31 @@ class Store {
             data: {
                 state: options.state
             },
-            computed: options.getters
+            computed: getComputed()
         })
         this._mutations = options.mutations
         this._actions = options.actions
         // getters
-        this.getters = options.getters
-        console.log(options.getters,  Object.keys(options.getters))
-        Object.keys(options.getters).forEach((key) => {
-            this.getters[key] = this._vm[key]
-        });
-        console.log(this.getters)
+        this._getters = options.getters
+        this.getters = {}
+       
         // 绑定commit方法，dispatch方法l;
         const store = this;
         const {commit, dispatch} = store;
         this.commit = commit.bind(this)
         this.dispacth = dispatch.bind(this)
+        function getComputed () {
+            let computedObj = {}
+            Object.keys(options.getters).forEach((key) => {
+                computedObj[key] = () => {return options.getters[key](store.state)}
+            });
+            return computedObj
+        }
+        // 这个赋值有问题
+        Object.keys(this._getters).forEach((key) => {
+            this.getters[key] = this._vm[key]
+        });
+        console.log(this.getters)
     }
     get state(){
         return this._vm.state;
